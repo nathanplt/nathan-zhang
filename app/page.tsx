@@ -80,7 +80,7 @@ export default function Home() {
       </header>
 
       <section className="about">
-        <p>Software engineer interested in building high-performance systems, optimizing AI models, and designing distributed data infrastructure. Currently studying CS at UCLA.</p>
+        <p>Interested in building high-performance systems, optimizing AI models, and designing distributed data infrastructure. Currently studying CS at UCLA.</p>
       </section>
 
       <section className="interests">
