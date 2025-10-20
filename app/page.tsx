@@ -39,9 +39,24 @@ export default function Home() {
       description: 'High-throughput pub/sub messaging system with thread-safe concurrent architecture using thread pools, async I/O, and atomic operations. Includes benchmarking harness for latency and throughput measurement.'
     },
     {
+      title: 'Locus (Meta AI Hackathon – 3rd Place)',
+      tech: 'VR, Cesium API, Qwen-VL, Stable Diffusion, Python',
+      description: 'AI-powered VR storyboarding tool for filmmakers to explore real-world locations and generate cinematic storyboards. Integrates image-to-text analysis, prompt optimization, and scene synthesis pipelines.'
+    },
+    {
       title: 'Code Review Agent',
       tech: 'Python, FastAPI, Kafka, PostgreSQL, pgvector, Docker',
       description: 'PR review agent with GitHub Apps integration generating code-diff summaries and inline comments. Implements security detection and uses vector search with pgvector embeddings for pattern matching.'
+    },
+    {
+      title: 'Intelligent Document Search Engine',
+      tech: 'Python, BM25, Sentence Transformers, FastAPI, PostgreSQL',
+      description: 'Hybrid dense–sparse retrieval engine combining BM25 ranking with transformer embeddings. Supports semantic search, custom relevance scoring, and metadata filtering for fast document discovery.'
+    },
+    {
+      title: 'Security Footage Analysis System',
+      tech: 'Python, OpenCV, YOLOv8, FastAPI',
+      description: 'Real-time computer vision pipeline for multi-camera video feeds, performing motion tracking, object detection, and automated event classification through RESTful APIs.'
     },
     {
       title: 'Bill-Splitting App',
