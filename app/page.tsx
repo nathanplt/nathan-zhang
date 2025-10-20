@@ -112,7 +112,7 @@ export default function Home() {
         {activeTab === 'overview' && (
           <section className="about">
             <p>Focused on building low-latency systems and optimizing ML inference pipelines. Spent the past year working on distributed data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and fine-tuning reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>. Currently exploring CUDA kernels for transformer inference, modern C++ concurrency patterns, and building AI agents for code analysis.</p>
-            <p>Right now: reading <a href="https://en.wikipedia.org/wiki/Flowers_for_Algernon" target="_blank" rel="noopener noreferrer" className="inline-link">Flowers for Algernon</a> and rewatching the Harry Potter movies in prep for a Universal Studios vacation with my girlfriend. :)</p>
+            <p>Right now: reading <a href="https://en.wikipedia.org/wiki/Flowers_for_Algernon" target="_blank" rel="noopener noreferrer" className="inline-link">Flowers for Algernon</a> and rewatching the Harry Potter movies in prep for a Universal Studios vacation with my girlfriend!</p>
           </section>
         )}
 
