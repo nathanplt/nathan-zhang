@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "engines": {
+    "node": ">=18.18.0 <=22"
+  },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.14",
     "next": "^15.5.6",
