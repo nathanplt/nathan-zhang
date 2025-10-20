@@ -267,6 +267,26 @@ h2 {
   margin: 0;
 }
 
+/* Inline Links */
+.inline-link {
+  color: var(--purple-500);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.inline-link:hover {
+  border-bottom-color: var(--purple-400);
+  opacity: 0.8;
+}
+
+.inline-link:focus-visible {
+  outline: 2px solid var(--purple-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* Footer */
 footer {
   margin-top: var(--space-10);
