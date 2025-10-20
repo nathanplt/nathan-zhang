@@ -11,7 +11,7 @@ export default function Home() {
       role: 'Software Engineer Intern',
       period: 'Jun – Aug 2025',
       points: [
-        'Rebuilt financial reporting pipeline with serverless architecture (AWS Step Functions, Fargate)',
+        'Rebuilt financial reporting pipeline with serverless AWS (Step Functions, Fargate)',
         'Developed ETL pipeline automating 500k monthly aggregations on $45M+ settlement data',
         'Centralized credit settlement data into S3 data lake for 5 enterprise merchants'
       ]
@@ -24,6 +24,16 @@ export default function Home() {
         'Improved frontier model\'s algorithmic reasoning through chain-of-thought analysis',
         'Authored 40+ step-by-step solutions for DP and graph problems to fine-tune models',
         'Documented 15+ failure modes to guide prompt templates and retraining'
+      ]
+    },
+    {
+      company: 'Code Ninjas',
+      role: 'Software Engineer Intern',
+      period: 'May – Jul 2024',
+      points: [
+        'Built data platform for 100+ students (React, Flask, MongoDB), replacing Excel tracker',
+        'Reduced grading time from 60 to 5 mins/day with autofilled forms and dashboards',
+        'Deployed homework submission portal with Gunicorn/Waitress for online grading'
       ]
     },
     {
