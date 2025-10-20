@@ -1,4 +1,10 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<'overview' | 'experience' | 'projects'>('overview');
+
   const experiences = [
     {
       company: 'Capital One',
@@ -36,115 +42,130 @@ export default function Home() {
     {
       title: 'Low-Latency Messaging System',
       tech: 'C++, Boost.Asio, ZeroMQ, Concurrency',
-      description: 'High-throughput pub/sub messaging system with thread-safe concurrent architecture using thread pools, async I/O, and atomic operations. Includes benchmarking harness for latency and throughput measurement.'
-    },
-    {
-      title: 'Locus (Meta AI Hackathon – 3rd Place)',
-      tech: 'VR, Cesium API, Qwen-VL, Stable Diffusion, Python',
-      description: 'AI-powered VR storyboarding tool for filmmakers to explore real-world locations and generate cinematic storyboards. Integrates image-to-text analysis, prompt optimization, and scene synthesis pipelines.'
+      description: 'High-throughput pub/sub messaging system with thread-safe concurrent architecture using thread pools, async I/O, and atomic operations. Benchmarked at <1ms p99 latency.',
+      github: 'https://github.com/nathanplt'
     },
     {
       title: 'Code Review Agent',
       tech: 'Python, FastAPI, Kafka, PostgreSQL, pgvector, Docker',
-      description: 'PR review agent with GitHub Apps integration generating code-diff summaries and inline comments. Implements security detection and uses vector search with pgvector embeddings for pattern matching.'
+      description: 'PR review agent with GitHub Apps integration generating code-diff summaries and inline comments. Implements security detection and uses vector search with pgvector embeddings for pattern matching.',
+      github: 'https://github.com/nathanplt'
+    },
+    {
+      title: 'Locus (Meta AI Hackathon – 3rd Place)',
+      tech: 'VR, Cesium API, Qwen-VL, Stable Diffusion, Python',
+      description: 'AI-powered VR storyboarding tool for filmmakers to explore real-world locations and generate cinematic storyboards. Integrates image-to-text analysis, prompt optimization, and scene synthesis pipelines.',
+      github: 'https://github.com/nathanplt'
     },
     {
       title: 'Intelligent Document Search Engine',
       tech: 'Python, BM25, Sentence Transformers, FastAPI, PostgreSQL',
-      description: 'Hybrid dense–sparse retrieval engine combining BM25 ranking with transformer embeddings. Supports semantic search, custom relevance scoring, and metadata filtering for fast document discovery.'
+      description: 'Hybrid dense–sparse retrieval engine combining BM25 ranking with transformer embeddings. Supports semantic search, custom relevance scoring, and metadata filtering for fast document discovery.',
+      github: 'https://github.com/nathanplt'
     },
     {
       title: 'Security Footage Analysis System',
       tech: 'Python, OpenCV, YOLOv8, FastAPI',
-      description: 'Real-time computer vision pipeline for multi-camera video feeds, performing motion tracking, object detection, and automated event classification through RESTful APIs.'
+      description: 'Real-time computer vision pipeline for multi-camera video feeds, performing motion tracking, object detection, and automated event classification through RESTful APIs.',
+      github: 'https://github.com/nathanplt'
     },
     {
       title: 'Bill-Splitting App',
       tech: 'React Native, Node.js, Express, PostgreSQL, AWS',
-      description: 'Receipt parsing automation with AWS Textract OCR. Features QR tab sharing, payment integration (PayPal/Venmo), and loan tracking on a Node.js backend.'
+      description: 'Receipt parsing automation with AWS Textract OCR. Features QR tab sharing, payment integration (PayPal/Venmo), and loan tracking on a Node.js backend.',
+      github: 'https://github.com/nathanplt'
     }
   ];
 
-  const interests = [
-    {
-      title: 'High Performance Systems',
-      description: 'Low-latency messaging, concurrent architectures, async I/O, thread-safe designs'
-    },
-    {
-      title: 'AI Optimization & Training',
-      description: 'Model fine-tuning, algorithmic reasoning, embeddings, LLM applications'
-    },
-    {
-      title: 'Distributed Data Systems',
-      description: 'Serverless architectures, ETL pipelines, data lakes, stream processing'
-    }
-  ];
 
   return (
     <div className="container">
       <header>
         <h1>Nathan Zhang</h1>
         <p className="subtitle">Computer Science @ UCLA</p>
-        <div className="contact">
+      </header>
+
+      <nav className="tabs">
+        <button
+          className={`tab ${activeTab === 'overview' ? 'active' : ''}`}
+          onClick={() => setActiveTab('overview')}
+        >
+          Overview
+        </button>
+        <span className="separator" aria-hidden="true">/</span>
+        <button
+          className={`tab ${activeTab === 'experience' ? 'active' : ''}`}
+          onClick={() => setActiveTab('experience')}
+        >
+          Experience
+        </button>
+        <span className="separator" aria-hidden="true">/</span>
+        <button
+          className={`tab ${activeTab === 'projects' ? 'active' : ''}`}
+          onClick={() => setActiveTab('projects')}
+        >
+          Projects
+        </button>
+      </nav>
+
+      <div className="tab-content">
+        {activeTab === 'overview' && (
+          <section className="about">
+            <p>Focused on building low-latency systems and optimizing ML inference pipelines. Spent the past year working on distributed data infrastructure at Capital One and fine-tuning reasoning models at Scale AI. Currently exploring CUDA kernels for transformer inference, modern C++ concurrency patterns, and building AI agents for code analysis.</p>
+            <p>Right now: reading Flowers for Algernon and rewatching the Harry Potter movies in prep for a Universal Studios vacation with my girlfriend. :)</p>
+          </section>
+        )}
+
+        {activeTab === 'experience' && (
+          <section className="experience">
+            <div className="timeline">
+              {experiences.map((exp, idx) => (
+                <div key={idx} className="timeline-item">
+                  <div className="timeline-header">
+                    <h3>{exp.company}</h3>
+                    <span className="period">{exp.period}</span>
+                  </div>
+                  <p className="role">{exp.role}</p>
+                  <ul>
+                    {exp.points.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'projects' && (
+          <section className="projects">
+            <div className="project-grid">
+              {projects.map((project, idx) => (
+                <a
+                  key={idx}
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-item"
+                >
+                  <h3>{project.title}</h3>
+                  <p className="tech-stack">{project.tech}</p>
+                  <p>{project.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <footer>
+        <div className="footer-links">
           <a href="mailto:nlzhang@ucla.edu">email</a>
           <span>/</span>
           <a href="https://www.linkedin.com/in/nathan-zhang-718422269/" target="_blank" rel="noopener noreferrer">linkedin</a>
           <span>/</span>
           <a href="https://github.com/nathanplt" target="_blank" rel="noopener noreferrer">github</a>
         </div>
-      </header>
-
-      <section className="about">
-        <p>Interested in building high-performance systems, optimizing AI models, and designing distributed data infrastructure. Currently studying CS at UCLA.</p>
-      </section>
-
-      <section className="interests">
-        <h2>Interests</h2>
-        <div className="interest-grid">
-          {interests.map((interest, idx) => (
-            <div key={idx} className="interest-item">
-              <h3>{interest.title}</h3>
-              <p>{interest.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="experience">
-        <h2>Experience</h2>
-        <div className="timeline">
-          {experiences.map((exp, idx) => (
-            <div key={idx} className="timeline-item">
-              <div className="timeline-header">
-                <h3>{exp.company}</h3>
-                <span className="period">{exp.period}</span>
-              </div>
-              <p className="role">{exp.role}</p>
-              <ul>
-                {exp.points.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="projects">
-        <h2>Projects</h2>
-        <div className="project-grid">
-          {projects.map((project, idx) => (
-            <div key={idx} className="project-item">
-              <h3>{project.title}</h3>
-              <p className="tech-stack">{project.tech}</p>
-              <p>{project.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <footer>
-        <p>&copy; 2025 Nathan Zhang</p>
       </footer>
     </div>
   );
