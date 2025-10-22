@@ -6,11 +6,12 @@ import Layered from './components/Layered';
 import HexagonAnimated from './components/HexagonAnimated';
 import VoronoiAnimated from './components/VoronoiAnimated';
 
-type BackgroundType = 'none' | 'pixels' | 'layered' | 'hexanimated' | 'voroanimated' | 'pixels-static' | 'layered-static' | 'hexanimated-static' | 'voroanimated-static';
+type BackgroundType = 'pixelwave' | 'layered' | 'hexanimated' | 'voroanimated';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'overview' | 'experience' | 'projects'>('overview');
-  const [background, setBackground] = useState<BackgroundType>('none');
+  const [background, setBackground] = useState<BackgroundType>('pixelwave');
+  const [animate, setAnimate] = useState<boolean>(false);
 
   const experiences = [
     {
@@ -98,26 +99,10 @@ export default function Home() {
   return (
     <>
       {/* Background Effects */}
-      {background === 'scanlines' && <ScanLines />}
-      {background === 'stripes' && <DiagonalStripes />}
-      {background === 'voronoi' && <VoronoiCells />}
-      {background === 'binary' && <BinaryRain />}
-      {background === 'magnetic' && <MagneticField />}
-      {background === 'topo' && <Topographic />}
-      {background === 'bokeh' && <Bokeh />}
-      {background === 'glitch' && <GlitchBars />}
-      {background === 'spotlight' && <Spotlight />}
-      {background === 'ripple' && <CornerRipple />}
-      {background === 'hexagon' && <HexagonGrid />}
-      {background === 'noise' && <NoiseTexture />}
-      {background === 'spiral' && <FibonacciSpiral />}
-      {background === 'squares' && <NestedSquares />}
-      {background === 'pixels' && <PixelFade />}
-      {background === 'layered' && <Layered />}
-      {background === 'scanwave' && <ScanWave />}
-      {background === 'pixelwave' && <PixelWave />}
-      {background === 'hexanimated' && <HexagonAnimated />}
-      {background === 'voroanimated' && <VoronoiAnimated />}
+      {background === 'layered' && <Layered reducedMotion staticMode={!animate} />}
+      {background === 'pixelwave' && <PixelWave reducedMotion staticMode={!animate} />}
+      {background === 'hexanimated' && <HexagonAnimated reducedMotion staticMode={!animate} />}
+      {background === 'voroanimated' && <VoronoiAnimated reducedMotion staticMode={!animate} />}
 
       {/* Background Switcher - Temporary for testing */}
       <div style={{
@@ -134,28 +119,42 @@ export default function Home() {
         border: '1px solid var(--gray-200)',
         maxWidth: '350px',
       }}>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+          <span style={{ fontSize: '11px', color: 'var(--gray-700)' }}>Animate</span>
+          <button
+            onClick={() => setAnimate(!animate)}
+            aria-pressed={animate}
+            style={{
+              position: 'relative',
+              width: '44px',
+              height: '24px',
+              borderRadius: '9999px',
+              border: '1px solid var(--gray-300)',
+              background: animate ? 'var(--purple-500)' : 'var(--gray-200)',
+              transition: 'background 150ms ease',
+              cursor: 'pointer'
+            }}
+          >
+            <span
+              style={{
+                position: 'absolute',
+                top: '2px',
+                left: animate ? '22px' : '2px',
+                width: '20px',
+                height: '20px',
+                borderRadius: '50%',
+                background: 'white',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.15)',
+                transition: 'left 150ms ease'
+              }}
+            />
+          </button>
+        </div>
         {[
-          { key: 'none', label: 'None' },
-          { key: 'scanlines', label: 'Scan' },
-          { key: 'stripes', label: 'Stripes' },
-          { key: 'voronoi', label: 'Voronoi' },
-          { key: 'binary', label: 'Binary' },
-          { key: 'magnetic', label: 'Magnetic' },
-          { key: 'topo', label: 'Topo' },
-          { key: 'bokeh', label: 'Bokeh' },
-          { key: 'glitch', label: 'Glitch' },
-          { key: 'spotlight', label: 'Spotlight' },
-          { key: 'ripple', label: 'Ripple' },
-          { key: 'hexagon', label: 'Hexagon' },
-          { key: 'noise', label: 'Noise' },
-          { key: 'spiral', label: 'Spiral' },
-          { key: 'squares', label: 'Squares' },
-          { key: 'pixels', label: 'Pixels' },
-          { key: 'layered', label: 'Layered' },
-          { key: 'scanwave', label: 'ScanWave' },
-          { key: 'pixelwave', label: 'PixelWave' },
-          { key: 'hexanimated', label: 'HexAnim' },
-          { key: 'voroanimated', label: 'VoroAnim' },
+          { key: 'pixelwave', label: 'Pixel' },
+          { key: 'voroanimated', label: 'Voronoi' },
+          { key: 'hexanimated', label: 'Hex' },
+          { key: 'layered', label: 'Wave' },
         ].map(({ key, label }) => (
           <button
             key={key}

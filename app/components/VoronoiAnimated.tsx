@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from 'react';
 
-export default function VoronoiAnimated() {
+type Props = { reducedMotion?: boolean; staticMode?: boolean };
+
+export default function VoronoiAnimated({ reducedMotion = false, staticMode = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isStaticRef = useRef<boolean>(staticMode);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -15,8 +18,13 @@ export default function VoronoiAnimated() {
     let animationFrameId: number;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
+      canvas.width = Math.floor(window.innerWidth * dpr);
+      canvas.height = Math.floor(window.innerHeight * dpr);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -44,18 +52,18 @@ export default function VoronoiAnimated() {
       }
     }
 
-    const points = Array.from({ length: 25 }, () => new Point());
+    const points = Array.from({ length: reducedMotion ? 22 : 28 }, () => new Point());
 
-    const animate = () => {
+    const draw = () => {
       ctx.fillStyle = '#fdfcfe';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      points.forEach(p => p.update());
+      if (!isStaticRef.current) points.forEach(p => p.update());
 
       // Draw voronoi cell edges
-      const step = 8;
-      for (let x = 0; x < canvas.width; x += step) {
-        for (let y = 0; y < canvas.height; y += step) {
+      const step = 15;
+      for (let x = 0; x < window.innerWidth; x += step) {
+        for (let y = 0; y < window.innerHeight; y += step) {
           let minDist = Infinity;
           let secondMinDist = Infinity;
 
@@ -69,13 +77,16 @@ export default function VoronoiAnimated() {
             }
           });
 
-          if (secondMinDist - minDist < 12) {
-            ctx.fillStyle = 'rgba(124, 107, 166, 0.2)';
+          if (secondMinDist - minDist < (reducedMotion ? 10 : 11)) {
+            ctx.fillStyle = `rgba(124, 107, 166, ${reducedMotion ? 0.18 : 0.22})`;
             ctx.fillRect(x, y, step, step);
           }
         }
       }
+    };
 
+    const animate = () => {
+      draw();
       animationFrameId = requestAnimationFrame(animate);
     };
 
@@ -86,6 +97,10 @@ export default function VoronoiAnimated() {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
+
+  useEffect(() => {
+    isStaticRef.current = staticMode;
+  }, [staticMode]);
 
   return <canvas ref={canvasRef} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }} />;
 }
