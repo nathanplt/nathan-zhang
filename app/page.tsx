@@ -53,19 +53,19 @@ export default function Home() {
       title: 'Low-Latency Messaging System',
       tech: 'C++, Boost.Asio, ZeroMQ, Concurrency',
       description: 'High-throughput pub/sub messaging system with thread-safe concurrent architecture using thread pools, async I/O, and atomic operations. Benchmarked at <1ms p99 latency.',
-      github: 'https://github.com/nathanplt'
+      github: 'https://github.com/nathanplt/pub-sub-system'
     },
     {
       title: 'Code Review Agent',
       tech: 'Python, FastAPI, Kafka, PostgreSQL, pgvector, Docker',
       description: 'PR review agent with GitHub Apps integration generating code-diff summaries and inline comments. Implements security detection and uses vector search with pgvector embeddings for pattern matching.',
-      github: 'https://github.com/nathanplt'
+      github: 'https://github.com/nathanplt/pr-review-agent'
     },
     {
       title: 'Locus (Meta AI Hackathon – 3rd Place)',
       tech: 'VR, Cesium API, Qwen-VL, Stable Diffusion, Python',
       description: 'AI-powered VR storyboarding tool for filmmakers to explore real-world locations and generate cinematic storyboards. Integrates image-to-text analysis, prompt optimization, and scene synthesis pipelines.',
-      github: 'https://github.com/nathanplt'
+      github: 'https://www.youtube.com/watch?v=YuX-z0hmIzI'
     },
     {
       title: 'Intelligent Document Search Engine',
@@ -83,7 +83,7 @@ export default function Home() {
       title: 'Bill-Splitting App',
       tech: 'React Native, Node.js, Express, PostgreSQL, AWS',
       description: 'Receipt parsing automation with AWS Textract OCR. Features QR tab sharing, payment integration (PayPal/Venmo), and loan tracking on a Node.js backend.',
-      github: 'https://github.com/nathanplt'
+      github: 'https://github.com/nathanplt/tab-share'
     }
   ];
 
