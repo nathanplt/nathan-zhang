@@ -1,0 +1,79 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+
+export default function HexagonAnimated() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let time = 0;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const size = 40;
+    const height = size * Math.sqrt(3);
+
+    const animate = () => {
+      ctx.fillStyle = '#fdfcfe';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      time += 0.02;
+
+      for (let row = 0; row < canvas.height / height + 2; row++) {
+        for (let col = 0; col < canvas.width / (size * 1.5) + 2; col++) {
+          const x = col * size * 1.5;
+          const y = row * height + (col % 2) * height / 2;
+
+          // Distance-based animation
+          const centerX = canvas.width / 2;
+          const centerY = canvas.height / 2;
+          const dist = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+          const wave = Math.sin(dist * 0.01 - time);
+          const alpha = Math.max(0, wave) * 0.15;
+
+          if (alpha > 0.02) {
+            ctx.fillStyle = `rgba(124, 107, 166, ${alpha})`;
+            ctx.beginPath();
+
+            for (let i = 0; i < 6; i++) {
+              const angle = (Math.PI / 3) * i;
+              const hx = x + size * Math.cos(angle);
+              const hy = y + size * Math.sin(angle);
+
+              if (i === 0) {
+                ctx.moveTo(hx, hy);
+              } else {
+                ctx.lineTo(hx, hy);
+              }
+            }
+            ctx.closePath();
+            ctx.fill();
+          }
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1, pointerEvents: 'none' }} />;
+}

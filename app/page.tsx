@@ -1,9 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import PixelWave from './components/PixelWave';
+import Layered from './components/Layered';
+import HexagonAnimated from './components/HexagonAnimated';
+import VoronoiAnimated from './components/VoronoiAnimated';
+
+type BackgroundType = 'none' | 'pixels' | 'layered' | 'hexanimated' | 'voroanimated' | 'pixels-static' | 'layered-static' | 'hexanimated-static' | 'voroanimated-static';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'overview' | 'experience' | 'projects'>('overview');
+  const [background, setBackground] = useState<BackgroundType>('none');
 
   const experiences = [
     {
@@ -89,11 +96,90 @@ export default function Home() {
 
 
   return (
-    <div className="container">
-      <header>
-        <h1>Nathan Zhang</h1>
-        <p className="subtitle">Computer Science @ UCLA</p>
-      </header>
+    <>
+      {/* Background Effects */}
+      {background === 'scanlines' && <ScanLines />}
+      {background === 'stripes' && <DiagonalStripes />}
+      {background === 'voronoi' && <VoronoiCells />}
+      {background === 'binary' && <BinaryRain />}
+      {background === 'magnetic' && <MagneticField />}
+      {background === 'topo' && <Topographic />}
+      {background === 'bokeh' && <Bokeh />}
+      {background === 'glitch' && <GlitchBars />}
+      {background === 'spotlight' && <Spotlight />}
+      {background === 'ripple' && <CornerRipple />}
+      {background === 'hexagon' && <HexagonGrid />}
+      {background === 'noise' && <NoiseTexture />}
+      {background === 'spiral' && <FibonacciSpiral />}
+      {background === 'squares' && <NestedSquares />}
+      {background === 'pixels' && <PixelFade />}
+      {background === 'layered' && <Layered />}
+      {background === 'scanwave' && <ScanWave />}
+      {background === 'pixelwave' && <PixelWave />}
+      {background === 'hexanimated' && <HexagonAnimated />}
+      {background === 'voroanimated' && <VoronoiAnimated />}
+
+      {/* Background Switcher - Temporary for testing */}
+      <div style={{
+        position: 'fixed',
+        top: '20px',
+        right: '20px',
+        zIndex: 1000,
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '6px',
+        background: 'rgba(255, 255, 255, 0.9)',
+        padding: '12px',
+        borderRadius: '8px',
+        border: '1px solid var(--gray-200)',
+        maxWidth: '350px',
+      }}>
+        {[
+          { key: 'none', label: 'None' },
+          { key: 'scanlines', label: 'Scan' },
+          { key: 'stripes', label: 'Stripes' },
+          { key: 'voronoi', label: 'Voronoi' },
+          { key: 'binary', label: 'Binary' },
+          { key: 'magnetic', label: 'Magnetic' },
+          { key: 'topo', label: 'Topo' },
+          { key: 'bokeh', label: 'Bokeh' },
+          { key: 'glitch', label: 'Glitch' },
+          { key: 'spotlight', label: 'Spotlight' },
+          { key: 'ripple', label: 'Ripple' },
+          { key: 'hexagon', label: 'Hexagon' },
+          { key: 'noise', label: 'Noise' },
+          { key: 'spiral', label: 'Spiral' },
+          { key: 'squares', label: 'Squares' },
+          { key: 'pixels', label: 'Pixels' },
+          { key: 'layered', label: 'Layered' },
+          { key: 'scanwave', label: 'ScanWave' },
+          { key: 'pixelwave', label: 'PixelWave' },
+          { key: 'hexanimated', label: 'HexAnim' },
+          { key: 'voroanimated', label: 'VoroAnim' },
+        ].map(({ key, label }) => (
+          <button
+            key={key}
+            onClick={() => setBackground(key as BackgroundType)}
+            style={{
+              padding: '6px 10px',
+              background: background === key ? 'var(--purple-500)' : 'transparent',
+              color: background === key ? 'white' : 'var(--gray-600)',
+              border: '1px solid var(--gray-300)',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontSize: '11px',
+            }}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      <div className="container">
+        <header>
+          <h1>Nathan Zhang</h1>
+          <p className="subtitle">Computer Science @ UCLA</p>
+        </header>
 
       <nav className="tabs">
         <button
@@ -177,6 +263,7 @@ export default function Home() {
           <a href="https://github.com/nathanplt" target="_blank" rel="noopener noreferrer">github</a>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }
