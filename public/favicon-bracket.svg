@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Left bracket [ -->
+  <path d="M 12 6 L 7 6 L 7 26 L 12 26"
+        stroke="#7c6ba6"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+  <!-- Right bracket ] -->
+  <path d="M 20 6 L 25 6 L 25 26 L 20 26"
+        stroke="#7c6ba6"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+</svg>
