@@ -11,7 +11,7 @@ type BackgroundType = 'grid' | 'wave' | 'hex' | 'voronoi' | 'none';
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'overview' | 'experience' | 'projects'>('overview');
   const [background, setBackground] = useState<BackgroundType>('hex');
-  const [animate, setAnimate] = useState<boolean>(false);
+  const [animate, setAnimate] = useState(false);
 
   const handleBackgroundChange = (newBackground: BackgroundType) => {
     setBackground(newBackground);
@@ -113,14 +113,12 @@ export default function Home() {
       <nav
         style={{
           position: 'fixed',
-          top: '20px',
           right: '24px',
           zIndex: 1000,
           fontSize: '15px',
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif',
           display: 'flex',
           alignItems: 'center',
-          gap: 'var(--space-2)',
         }}
         aria-label="Background controls"
       >
@@ -132,7 +130,7 @@ export default function Home() {
           { key: 'none', label: 'none' },
         ].map(({ key, label }, idx) => (
           <span key={key} style={{ display: 'flex', alignItems: 'center' }}>
-            {idx > 0 && <span style={{ margin: '0 var(--space-1)', color: 'var(--gray-300)' }} aria-hidden="true">/</span>}
+            {idx > 0 && <span style={{ margin: '0 var(--space-2)', color: 'var(--gray-300)' }} aria-hidden="true">/</span>}
             <button
               onClick={() => handleBackgroundChange(key as BackgroundType)}
               aria-label={`Set background to ${label}`}
@@ -162,7 +160,6 @@ export default function Home() {
             </button>
           </span>
         ))}
-        <span style={{ margin: '0 var(--space-2)', color: 'var(--gray-400)', fontSize: '14px' }} aria-hidden="true">|</span>
         <button
           onClick={() => {
             if (background !== 'none') {
@@ -175,7 +172,8 @@ export default function Home() {
           style={{
             background: 'none',
             border: 'none',
-            padding: 'var(--space-1) var(--space-1)',
+            padding: 'var(--space-1) var(--space-2)',
+            marginLeft: 'var(--space-3)',
             color: background === 'none'
               ? 'var(--gray-300)'
               : animate
@@ -184,25 +182,27 @@ export default function Home() {
             cursor: background === 'none' ? 'not-allowed' : 'pointer',
             fontSize: '15px',
             fontWeight: '400',
-            transition: 'all 0.2s ease',
+            transition: 'color 0.2s ease, background 0.2s ease, opacity 0.2s ease',
             fontFamily: 'inherit',
-            borderRadius: '2px',
+            borderRadius: '4px',
             opacity: background === 'none' ? 0.4 : 1,
+            width: '60px',
+            textAlign: 'center',
             textDecorationLine: animate && background !== 'none' ? 'underline' : 'none',
             textDecorationColor: 'var(--purple-500)',
             textUnderlineOffset: '3px',
             textDecorationThickness: '1px',
-            width: '50px',
-            textAlign: 'left',
           }}
           onMouseEnter={(e) => {
             if (background !== 'none') {
               e.currentTarget.style.color = 'var(--purple-500)';
+              e.currentTarget.style.background = 'var(--gray-50)';
             }
           }}
           onMouseLeave={(e) => {
-            if (background !== 'none' && !animate) {
-              e.currentTarget.style.color = 'var(--gray-500)';
+            if (background !== 'none') {
+              e.currentTarget.style.color = animate ? 'var(--purple-500)' : 'var(--gray-500)';
+              e.currentTarget.style.background = 'none';
             }
           }}
         >
