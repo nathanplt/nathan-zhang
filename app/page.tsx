@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import GridBackground from './components/GridBackground';
-import WaveBackground from './components/WaveBackground';
-import HexBackground from './components/HexBackground';
-import VoronoiBackground from './components/VoronoiBackground';
+import GridBackground from './backgrounds/GridBackground';
+import WaveBackground from './backgrounds/WaveBackground';
+import HexBackground from './backgrounds/HexBackground';
+import VoronoiBackground from './backgrounds/VoronoiBackground';
 
 type BackgroundType = 'grid' | 'wave' | 'hex' | 'voronoi' | 'none';
 
