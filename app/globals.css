@@ -328,7 +328,11 @@ footer {
 /* Responsive */
 @media (max-width: 640px) {
   .container {
-    padding: var(--space-10) var(--space-5);
+    padding: var(--space-16) var(--space-5);
+  }
+
+  header {
+    margin-bottom: var(--space-8);
   }
 
   h1 {
@@ -349,10 +353,18 @@ footer {
   }
 
   nav[aria-label="Background controls"] {
-    top: 12px;
+    top: 28px;
     right: 12px;
     font-size: 13px;
     gap: 4px;
+    flex-wrap: wrap;
+    max-width: calc(100% - 24px);
+    background: rgba(253, 252, 254, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: var(--space-2);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   nav[aria-label="Background controls"] button {

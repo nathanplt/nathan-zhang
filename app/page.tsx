@@ -162,7 +162,7 @@ export default function Home() {
             </button>
           </span>
         ))}
-        <span style={{ margin: '0 var(--space-1)', color: 'var(--gray-300)' }} aria-hidden="true">·</span>
+        <span style={{ margin: '0 var(--space-2)', color: 'var(--gray-400)', fontSize: '14px' }} aria-hidden="true">|</span>
         <button
           onClick={() => {
             if (background !== 'none') {
