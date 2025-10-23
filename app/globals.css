@@ -328,12 +328,13 @@ footer {
 /* Background Controls */
 nav[aria-label="Background controls"] {
   top: 20px;
+  right: 24px;
 }
 
 /* Responsive */
 @media (max-width: 640px) {
   .container {
-    padding: 120px var(--space-5) var(--space-16);
+    padding: 90px var(--space-5) var(--space-16);
   }
 
   header {
@@ -359,25 +360,28 @@ nav[aria-label="Background controls"] {
 
   nav[aria-label="Background controls"] {
     top: 16px;
-    right: 12px;
-    font-size: 12px;
-    flex-wrap: wrap;
-    max-width: calc(100% - 24px);
+    left: 0;
+    right: 0;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 9px;
     background: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    padding: 4px var(--space-2);
+    padding: 3px 6px;
     border-radius: 4px;
     box-shadow: none;
   }
 
   nav[aria-label="Background controls"] button {
-    font-size: 13px;
-    padding: 2px;
+    font-size: 9px;
+    padding: 2px 1px;
   }
 
   nav[aria-label="Background controls"] span[aria-hidden] {
-    font-size: 12px;
+    font-size: 9px;
+    margin: 0 1px;
   }
 }
 

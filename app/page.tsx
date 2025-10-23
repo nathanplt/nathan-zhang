@@ -113,7 +113,6 @@ export default function Home() {
       <nav
         style={{
           position: 'fixed',
-          right: '24px',
           zIndex: 1000,
           fontSize: '15px',
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif',
