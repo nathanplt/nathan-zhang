@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 type Props = { reducedMotion?: boolean; staticMode?: boolean };
 
-export default function VoronoiAnimated({ reducedMotion = false, staticMode = false }: Props) {
+export default function VoronoiBackground({ reducedMotion = false, staticMode = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isStaticRef = useRef<boolean>(staticMode);
 
@@ -29,7 +29,6 @@ export default function VoronoiAnimated({ reducedMotion = false, staticMode = fa
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Generate moving points
     class Point {
       x: number;
       y: number;
@@ -37,8 +36,8 @@ export default function VoronoiAnimated({ reducedMotion = false, staticMode = fa
       vy: number;
 
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        this.x = Math.random() * window.innerWidth;
+        this.y = Math.random() * window.innerHeight;
         this.vx = (Math.random() - 0.5) * 0.5;
         this.vy = (Math.random() - 0.5) * 0.5;
       }
@@ -47,8 +46,8 @@ export default function VoronoiAnimated({ reducedMotion = false, staticMode = fa
         this.x += this.vx;
         this.y += this.vy;
 
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        if (this.x < 0 || this.x > window.innerWidth) this.vx *= -1;
+        if (this.y < 0 || this.y > window.innerHeight) this.vy *= -1;
       }
     }
 
@@ -60,7 +59,6 @@ export default function VoronoiAnimated({ reducedMotion = false, staticMode = fa
 
       if (!isStaticRef.current) points.forEach(p => p.update());
 
-      // Draw voronoi cell edges
       const step = 15;
       for (let x = 0; x < window.innerWidth; x += step) {
         for (let y = 0; y < window.innerHeight; y += step) {
@@ -96,7 +94,7 @@ export default function VoronoiAnimated({ reducedMotion = false, staticMode = fa
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
     isStaticRef.current = staticMode;

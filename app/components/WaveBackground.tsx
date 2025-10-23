@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 type Props = { reducedMotion?: boolean; staticMode?: boolean };
 
-export default function Layered({ reducedMotion = false, staticMode = false }: Props) {
+export default function WaveBackground({ reducedMotion = false, staticMode = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isStaticRef = useRef<boolean>(staticMode);
 
@@ -16,7 +16,7 @@ export default function Layered({ reducedMotion = false, staticMode = false }: P
     if (!ctx) return;
 
     let animationFrameId: number;
-    let time = 0;
+    let time = 3.1;
 
     const resizeCanvas = () => {
       const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
@@ -34,7 +34,6 @@ export default function Layered({ reducedMotion = false, staticMode = false }: P
       ctx.fillStyle = '#fdfcfe';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Multiple overlapping sine waves creating layered effect
       for (let layer = 0; layer < 6; layer++) {
         ctx.beginPath();
         ctx.strokeStyle = `rgba(124, 107, 166, ${0.09 - layer * 0.011})`;
@@ -45,8 +44,7 @@ export default function Layered({ reducedMotion = false, staticMode = false }: P
         const yOffset = window.innerHeight * (0.30 + layer * 0.1);
 
         for (let x = 0; x < window.innerWidth; x += 5) {
-          const t = staticMode ? 3.1 : time;
-          const y = yOffset + Math.sin(x * frequency + t + layer * 0.6) * amplitude;
+          const y = yOffset + Math.sin(x * frequency + time + layer * 0.6) * amplitude;
 
           if (x === 0) {
             ctx.moveTo(x, y);
@@ -60,20 +58,19 @@ export default function Layered({ reducedMotion = false, staticMode = false }: P
 
     const animate = () => {
       if (!isStaticRef.current) {
-        time += reducedMotion ? 0.0018 : 0.004;
+        time += 0.01;
       }
       draw();
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animationFrameId = requestAnimationFrame(animate);
     animate();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
     isStaticRef.current = staticMode;

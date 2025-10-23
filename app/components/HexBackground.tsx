@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 type Props = { reducedMotion?: boolean; staticMode?: boolean };
 
-export default function PixelWave({ reducedMotion = false, staticMode = false }: Props) {
+export default function HexBackground({ reducedMotion = false, staticMode = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isStaticRef = useRef<boolean>(staticMode);
 
@@ -16,7 +16,7 @@ export default function PixelWave({ reducedMotion = false, staticMode = false }:
     if (!ctx) return;
 
     let animationFrameId: number;
-    let time = 0;
+    let time = 2.6;
 
     const resizeCanvas = () => {
       const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
@@ -30,28 +30,41 @@ export default function PixelWave({ reducedMotion = false, staticMode = false }:
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const basePixel = 14;
+    const size = 36;
+    const height = size * Math.sqrt(3);
 
     const draw = () => {
       ctx.fillStyle = '#fdfcfe';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const pixelSize = Math.max(10, Math.min(basePixel, Math.floor(width / 90)));
+      for (let row = 0; row < canvas.height / height + 2; row++) {
+        for (let col = 0; col < canvas.width / (size * 1.5) + 2; col++) {
+          const x = col * size * 1.5;
+          const y = row * height + (col % 2) * height / 2;
 
-      for (let x = 0; x < width; x += pixelSize) {
-        for (let y = 0; y < height; y += pixelSize) {
-          const speedFactor = reducedMotion ? 0.6 : 1;
-          const t = isStaticRef.current ? 4.2 : time;
-          const wave1 = Math.sin(x * 0.012 + t * speedFactor) * 0.5 + 0.5;
-          const wave2 = Math.sin(y * 0.012 + t * 1.15 * speedFactor) * 0.5 + 0.5;
-          const combined = (wave1 + wave2) / 2;
-          const alpha = Math.min(0.16, combined * 0.16);
+          const centerX = canvas.width / 2;
+          const centerY = canvas.height / 2;
+          const dist = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+          const wave = Math.sin(dist * 0.012 - time);
+          const alpha = Math.max(0, wave) * (reducedMotion ? 0.12 : 0.16);
 
           if (alpha > 0.02) {
             ctx.fillStyle = `rgba(124, 107, 166, ${alpha})`;
-            ctx.fillRect(x, y, pixelSize - 1, pixelSize - 1);
+            ctx.beginPath();
+
+            for (let i = 0; i < 6; i++) {
+              const angle = (Math.PI / 3) * i;
+              const hx = x + size * Math.cos(angle);
+              const hy = y + size * Math.sin(angle);
+
+              if (i === 0) {
+                ctx.moveTo(hx, hy);
+              } else {
+                ctx.lineTo(hx, hy);
+              }
+            }
+            ctx.closePath();
+            ctx.fill();
           }
         }
       }
@@ -59,20 +72,19 @@ export default function PixelWave({ reducedMotion = false, staticMode = false }:
 
     const animate = () => {
       if (!isStaticRef.current) {
-        time += 0.055;
+        time += 0.024;
       }
       draw();
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animationFrameId = requestAnimationFrame(animate);
     animate();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
     isStaticRef.current = staticMode;

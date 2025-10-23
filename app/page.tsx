@@ -1,17 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import PixelWave from './components/PixelWave';
-import Layered from './components/Layered';
-import HexagonAnimated from './components/HexagonAnimated';
-import VoronoiAnimated from './components/VoronoiAnimated';
+import GridBackground from './components/GridBackground';
+import WaveBackground from './components/WaveBackground';
+import HexBackground from './components/HexBackground';
+import VoronoiBackground from './components/VoronoiBackground';
 
-type BackgroundType = 'pixelwave' | 'layered' | 'hexanimated' | 'voroanimated';
+type BackgroundType = 'grid' | 'wave' | 'hex' | 'voronoi' | 'none';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'overview' | 'experience' | 'projects'>('overview');
-  const [background, setBackground] = useState<BackgroundType>('pixelwave');
+  const [background, setBackground] = useState<BackgroundType>('hex');
   const [animate, setAnimate] = useState<boolean>(false);
+
+  const handleBackgroundChange = (newBackground: BackgroundType) => {
+    setBackground(newBackground);
+    if (newBackground === 'none') {
+      setAnimate(false);
+    }
+  };
 
   const experiences = [
     {
@@ -98,81 +105,110 @@ export default function Home() {
 
   return (
     <>
-      {/* Background Effects */}
-      {background === 'layered' && <Layered reducedMotion staticMode={!animate} />}
-      {background === 'pixelwave' && <PixelWave reducedMotion staticMode={!animate} />}
-      {background === 'hexanimated' && <HexagonAnimated reducedMotion staticMode={!animate} />}
-      {background === 'voroanimated' && <VoronoiAnimated reducedMotion staticMode={!animate} />}
+      {background === 'wave' && <WaveBackground reducedMotion staticMode={!animate} />}
+      {background === 'grid' && <GridBackground reducedMotion staticMode={!animate} />}
+      {background === 'hex' && <HexBackground reducedMotion staticMode={!animate} />}
+      {background === 'voronoi' && <VoronoiBackground reducedMotion staticMode={!animate} />}
 
-      {/* Background Switcher - Temporary for testing */}
-      <div style={{
-        position: 'fixed',
-        top: '20px',
-        right: '20px',
-        zIndex: 1000,
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '6px',
-        background: 'rgba(255, 255, 255, 0.9)',
-        padding: '12px',
-        borderRadius: '8px',
-        border: '1px solid var(--gray-200)',
-        maxWidth: '350px',
-      }}>
-        <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '11px', color: 'var(--gray-700)' }}>Animate</span>
-          <button
-            onClick={() => setAnimate(!animate)}
-            aria-pressed={animate}
-            style={{
-              position: 'relative',
-              width: '44px',
-              height: '24px',
-              borderRadius: '9999px',
-              border: '1px solid var(--gray-300)',
-              background: animate ? 'var(--purple-500)' : 'var(--gray-200)',
-              transition: 'background 150ms ease',
-              cursor: 'pointer'
-            }}
-          >
-            <span
-              style={{
-                position: 'absolute',
-                top: '2px',
-                left: animate ? '22px' : '2px',
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                background: 'white',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.15)',
-                transition: 'left 150ms ease'
-              }}
-            />
-          </button>
-        </div>
+      <nav
+        style={{
+          position: 'fixed',
+          top: '20px',
+          right: '24px',
+          zIndex: 1000,
+          fontSize: '15px',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--space-2)',
+        }}
+        aria-label="Background controls"
+      >
         {[
-          { key: 'pixelwave', label: 'Pixel' },
-          { key: 'voroanimated', label: 'Voronoi' },
-          { key: 'hexanimated', label: 'Hex' },
-          { key: 'layered', label: 'Wave' },
-        ].map(({ key, label }) => (
-          <button
-            key={key}
-            onClick={() => setBackground(key as BackgroundType)}
-            style={{
-              padding: '6px 10px',
-              background: background === key ? 'var(--purple-500)' : 'transparent',
-              color: background === key ? 'white' : 'var(--gray-600)',
-              border: '1px solid var(--gray-300)',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '11px',
-            }}
-          >
-            {label}
-          </button>
+          { key: 'hex', label: 'hex' },
+          { key: 'voronoi', label: 'voronoi' },
+          { key: 'wave', label: 'wave' },
+          { key: 'grid', label: 'grid' },
+          { key: 'none', label: 'none' },
+        ].map(({ key, label }, idx) => (
+          <span key={key} style={{ display: 'flex', alignItems: 'center' }}>
+            {idx > 0 && <span style={{ margin: '0 var(--space-1)', color: 'var(--gray-300)' }} aria-hidden="true">/</span>}
+            <button
+              onClick={() => handleBackgroundChange(key as BackgroundType)}
+              aria-label={`Set background to ${label}`}
+              aria-pressed={background === key}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 'var(--space-1) var(--space-1)',
+                color: background === key ? 'var(--purple-500)' : 'var(--gray-500)',
+                cursor: 'pointer',
+                fontSize: '15px',
+                fontWeight: '400',
+                transition: 'color 0.2s ease',
+                fontFamily: 'inherit',
+                borderRadius: '2px',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--purple-500)';
+              }}
+              onMouseLeave={(e) => {
+                if (background !== key) {
+                  e.currentTarget.style.color = 'var(--gray-500)';
+                }
+              }}
+            >
+              {label}
+            </button>
+          </span>
         ))}
-      </div>
+        <span style={{ margin: '0 var(--space-1)', color: 'var(--gray-300)' }} aria-hidden="true">·</span>
+        <button
+          onClick={() => {
+            if (background !== 'none') {
+              setAnimate(!animate);
+            }
+          }}
+          aria-label={animate ? 'Pause animation' : 'Play animation'}
+          aria-pressed={animate}
+          disabled={background === 'none'}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 'var(--space-1) var(--space-1)',
+            color: background === 'none'
+              ? 'var(--gray-300)'
+              : animate
+                ? 'var(--purple-500)'
+                : 'var(--gray-500)',
+            cursor: background === 'none' ? 'not-allowed' : 'pointer',
+            fontSize: '15px',
+            fontWeight: '400',
+            transition: 'all 0.2s ease',
+            fontFamily: 'inherit',
+            borderRadius: '2px',
+            opacity: background === 'none' ? 0.4 : 1,
+            textDecorationLine: animate && background !== 'none' ? 'underline' : 'none',
+            textDecorationColor: 'var(--purple-500)',
+            textUnderlineOffset: '3px',
+            textDecorationThickness: '1px',
+            width: '50px',
+            textAlign: 'left',
+          }}
+          onMouseEnter={(e) => {
+            if (background !== 'none') {
+              e.currentTarget.style.color = 'var(--purple-500)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (background !== 'none' && !animate) {
+              e.currentTarget.style.color = 'var(--gray-500)';
+            }
+          }}
+        >
+          {animate ? 'pause' : 'play'}
+        </button>
+      </nav>
 
       <div className="container">
         <header>

@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 
 type Props = { reducedMotion?: boolean; staticMode?: boolean };
 
-export default function HexagonAnimated({ reducedMotion = false, staticMode = false }: Props) {
+export default function GridBackground({ reducedMotion = false, staticMode = false }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isStaticRef = useRef<boolean>(staticMode);
 
@@ -16,7 +16,7 @@ export default function HexagonAnimated({ reducedMotion = false, staticMode = fa
     if (!ctx) return;
 
     let animationFrameId: number;
-    let time = 0;
+    let time = 4.2;
 
     const resizeCanvas = () => {
       const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
@@ -30,43 +30,27 @@ export default function HexagonAnimated({ reducedMotion = false, staticMode = fa
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const size = 36;
-    const height = size * Math.sqrt(3);
+    const pixelSize = 16;
+    const gap = 4;
+    const gridSize = pixelSize + gap;
 
     const draw = () => {
       ctx.fillStyle = '#fdfcfe';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      for (let row = 0; row < canvas.height / height + 2; row++) {
-        for (let col = 0; col < canvas.width / (size * 1.5) + 2; col++) {
-          const x = col * size * 1.5;
-          const y = row * height + (col % 2) * height / 2;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
 
-          // Distance-based animation
-          const centerX = canvas.width / 2;
-          const centerY = canvas.height / 2;
-          const dist = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
-          const t = isStaticRef.current ? 2.6 : time;
-          const wave = Math.sin(dist * 0.012 - t);
-          const alpha = Math.max(0, wave) * (reducedMotion ? 0.12 : 0.16);
+      for (let x = 0; x < width; x += gridSize) {
+        for (let y = 0; y < height; y += gridSize) {
+          const wave1 = Math.sin((x * 0.01 + y * 0.006) + time * (reducedMotion ? 0.4 : 0.6));
+          const wave2 = Math.cos((x * 0.006 - y * 0.008) - time * (reducedMotion ? 0.3 : 0.5));
+          const combined = (wave1 + wave2) / 2;
+          const alpha = (combined * 0.5 + 0.5) * 0.16;
 
-          if (alpha > 0.02) {
+          if (alpha > 0.03) {
             ctx.fillStyle = `rgba(124, 107, 166, ${alpha})`;
-            ctx.beginPath();
-
-            for (let i = 0; i < 6; i++) {
-              const angle = (Math.PI / 3) * i;
-              const hx = x + size * Math.cos(angle);
-              const hy = y + size * Math.sin(angle);
-
-              if (i === 0) {
-                ctx.moveTo(hx, hy);
-              } else {
-                ctx.lineTo(hx, hy);
-              }
-            }
-            ctx.closePath();
-            ctx.fill();
+            ctx.fillRect(x, y, pixelSize, pixelSize);
           }
         }
       }
@@ -74,7 +58,7 @@ export default function HexagonAnimated({ reducedMotion = false, staticMode = fa
 
     const animate = () => {
       if (!isStaticRef.current) {
-        time += 0.024;
+        time += 0.06;
       }
       draw();
       animationFrameId = requestAnimationFrame(animate);
@@ -86,7 +70,7 @@ export default function HexagonAnimated({ reducedMotion = false, staticMode = fa
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
     isStaticRef.current = staticMode;
