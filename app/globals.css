@@ -347,4 +347,27 @@ footer {
   .period {
     margin-top: var(--space-1);
   }
+
+  nav[aria-label="Background controls"] {
+    top: 12px;
+    right: 12px;
+    font-size: 13px;
+    gap: 4px;
+  }
+
+  nav[aria-label="Background controls"] button {
+    font-size: 13px !important;
+    padding: 2px 2px !important;
+  }
+
+  nav[aria-label="Background controls"] span[aria-hidden] {
+    font-size: 12px;
+  }
+}
+
+/* Background Controls Focus Styles */
+nav[aria-label="Background controls"] button:focus-visible {
+  outline: 2px solid var(--purple-500);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
