@@ -58,7 +58,7 @@ export default function GridBackground({ reducedMotion = false, staticMode = fal
 
     const animate = () => {
       if (!isStaticRef.current) {
-        time += 0.06;
+        time += 0.014;
       }
       draw();
       animationFrameId = requestAnimationFrame(animate);

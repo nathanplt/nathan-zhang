@@ -72,7 +72,7 @@ export default function HexBackground({ reducedMotion = false, staticMode = fals
 
     const animate = () => {
       if (!isStaticRef.current) {
-        time += 0.024;
+        time += 0.012;
       }
       draw();
       animationFrameId = requestAnimationFrame(animate);
