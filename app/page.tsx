@@ -243,7 +243,7 @@ export default function Home() {
           <section className="about">
             <p>Focused on building low-latency systems and optimizing ML inference pipelines. Spent the past year working on distributed data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and fine-tuning reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
             <p>Right now I'm starting two projects: a GPU-accelerated LiDAR mapping system for real-time 3D reconstruction, and a decentralized multi-agent robotics simulator where agents make independent decisions and coordinate without a central controller. Built in C++, CUDA, and Python, focusing on parallel computing, distributed systems, and emerging intelligent behavior.</p>
-            <p>Outside of coding, I'm reading <a href="https://en.wikipedia.org/wiki/Flowers_for_Algernon" target="_blank" rel="noopener noreferrer" className="inline-link">Flowers for Algernon</a>, rewatching Harry Potter in prep for Universal Studios with my girlfriend, trying new restaurants (Beli profile needs work), and playing some Roblox.</p>
+            <p>Outside of coding, I'm reading <a href="https://en.wikipedia.org/wiki/Flowers_for_Algernon" target="_blank" rel="noopener noreferrer" className="inline-link">Flowers for Algernon</a>, trying new restaurants (Beli profile needs work), playing some Roblox, and rewatching Harry Potter in prep for a Universal Studios vacation with my girlfriend!</p>
           </section>
         )}
 
