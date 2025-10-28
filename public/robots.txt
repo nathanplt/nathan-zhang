@@ -1,0 +1,5 @@
+# allow crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://www.nlzhang.com/sitemap.xml

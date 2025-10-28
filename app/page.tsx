@@ -210,15 +210,16 @@ export default function Home() {
       </nav>
 
       <div className="container">
-        <header>
+        <header role="banner">
           <h1>Nathan Zhang</h1>
           <p className="subtitle">Computer Science @ UCLA</p>
         </header>
 
-      <nav className="tabs">
+      <nav className="tabs" aria-label="Main navigation">
         <button
           className={`tab ${activeTab === 'overview' ? 'active' : ''}`}
           onClick={() => setActiveTab('overview')}
+          aria-current={activeTab === 'overview' ? 'page' : undefined}
         >
           Overview
         </button>
@@ -226,6 +227,7 @@ export default function Home() {
         <button
           className={`tab ${activeTab === 'experience' ? 'active' : ''}`}
           onClick={() => setActiveTab('experience')}
+          aria-current={activeTab === 'experience' ? 'page' : undefined}
         >
           Experience
         </button>
@@ -233,12 +235,13 @@ export default function Home() {
         <button
           className={`tab ${activeTab === 'projects' ? 'active' : ''}`}
           onClick={() => setActiveTab('projects')}
+          aria-current={activeTab === 'projects' ? 'page' : undefined}
         >
           Projects
         </button>
       </nav>
 
-      <div className="tab-content">
+      <main className="tab-content" role="main">
         {activeTab === 'overview' && (
           <section className="about">
             <p>Focused on building low-latency systems and optimizing ML inference pipelines. Spent the past year working on distributed data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and fine-tuning reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
@@ -287,9 +290,9 @@ export default function Home() {
             </div>
           </section>
         )}
-      </div>
+      </main>
 
-      <footer>
+      <footer role="contentinfo">
         <div className="footer-links">
           <a href="mailto:nlzhang@ucla.edu">email</a>
           <span>/</span>
