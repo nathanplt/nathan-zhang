@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.nlzhang.com"),
-  title: "Nathan Zhang | Software Engineer",
+  title: "Nathan Zhang",
   description: "Software engineer interested in building high-performance systems, optimizing AI models, and designing distributed data infrastructure. UCLA Computer Science student with experience at Capital One and Scale AI.",
   keywords: ["Nathan Zhang", "Software Engineer", "UCLA", "Computer Science", "Machine Learning", "Distributed Systems", "Full Stack Developer", "Capital One", "Scale AI"],
   authors: [{ name: "Nathan Zhang" }],
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://www.nlzhang.com",
-    title: "Nathan Zhang | Software Engineer",
+    title: "Nathan Zhang",
     description: "Software engineer interested in building high-performance systems, optimizing AI models, and designing distributed data infrastructure.",
     siteName: "Nathan Zhang Portfolio",
     images: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nathan Zhang | Software Engineer",
+    title: "Nathan Zhang",
     description: "Software engineer interested in building high-performance systems, optimizing AI models, and designing distributed data infrastructure.",
     images: ["/og-image.png"],
   },
