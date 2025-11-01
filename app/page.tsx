@@ -22,9 +22,23 @@ export default function Home() {
 
   const experiences = [
     {
+      company: 'UCLA ELFIN CubeSat',
+      role: 'Ground Software Engineer',
+      period: 'Oct 2025 – Present',
+      link: 'https://elfin.igpp.ucla.edu/',
+      linkColor: '#2774AE',
+      points: [
+        'Building multithreaded Python backend for UART communication with flight computer',
+        'Implementing command dispatch with COBS packet encoding and ACK/timeout recovery',
+        'Integrating ZeroMQ messaging to stream telemetry packets to GUI and ground database'
+      ]
+    },
+    {
       company: 'Capital One',
       role: 'Software Engineer Intern',
       period: 'Jun – Aug 2025',
+      link: 'https://www.capitalone.com',
+      linkColor: '#DB1F26',
       points: [
         'Rebuilt financial reporting pipeline with serverless AWS (Step Functions, Fargate)',
         'Developed ETL pipeline automating 500k monthly aggregations on $45M+ settlement data',
@@ -35,6 +49,8 @@ export default function Home() {
       company: 'Scale AI',
       role: 'Technical Advisor Intern - GenAI',
       period: 'Nov 2024 – Jun 2025',
+      link: 'https://scale.com',
+      linkColor: '#7C3AED',
       points: [
         'Improved frontier model\'s algorithmic reasoning through chain-of-thought analysis',
         'Authored 40+ step-by-step solutions for DP and graph problems to fine-tune models',
@@ -45,6 +61,8 @@ export default function Home() {
       company: 'Code Ninjas',
       role: 'Software Engineer Intern',
       period: 'May – Jul 2024',
+      link: 'https://www.codeninjas.com/nj-livingston',
+      linkColor: '#00A651',
       points: [
         'Built data platform for 100+ students (React, Flask, MongoDB), replacing Excel tracker',
         'Reduced grading time from 60 to 5 mins/day with autofilled forms and dashboards',
@@ -55,6 +73,8 @@ export default function Home() {
       company: 'Blast AI',
       role: 'Machine Learning Researcher',
       period: 'Jun – Nov 2023',
+      link: 'https://ieeexplore.ieee.org/document/10390981',
+      linkColor: '#00629B',
       points: [
         'Developed LLM-based semantic code similarity model with fine-tuned embeddings',
         'Outperformed GPT-4 embeddings by 22% F1-score (94.3% accuracy on 45k programs)',
@@ -256,7 +276,23 @@ export default function Home() {
               {experiences.map((exp, idx) => (
                 <div key={idx} className="timeline-item">
                   <div className="timeline-header">
-                    <h3>{exp.company}</h3>
+                    <h3>
+                      {exp.link ? (
+                        <a
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-link"
+                          style={{
+                            '--link-color': exp.linkColor
+                          } as React.CSSProperties}
+                        >
+                          {exp.company}
+                        </a>
+                      ) : (
+                        exp.company
+                      )}
+                    </h3>
                     <span className="period">{exp.period}</span>
                   </div>
                   <p className="role">{exp.role}</p>

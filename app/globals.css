@@ -269,7 +269,7 @@ h2 {
 
 /* Inline Links */
 .inline-link {
-  color: var(--purple-500);
+  color: var(--link-color, var(--purple-500));
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: all 0.2s ease;
@@ -277,12 +277,12 @@ h2 {
 }
 
 .inline-link:hover {
-  border-bottom-color: var(--purple-400);
+  border-bottom-color: var(--link-color, var(--purple-400));
   opacity: 0.8;
 }
 
 .inline-link:focus-visible {
-  outline: 2px solid var(--purple-500);
+  outline: 2px solid var(--link-color, var(--purple-500));
   outline-offset: 2px;
   border-radius: 2px;
 }
