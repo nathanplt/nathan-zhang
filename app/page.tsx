@@ -26,7 +26,7 @@ export default function Home() {
       role: 'Ground Software Engineer',
       period: 'Oct 2025 – Present',
       link: 'https://elfin.igpp.ucla.edu/',
-      linkColor: '#2774AE',
+      linkColor: '#7c6ba6',
       points: [
         'Building multithreaded Python backend for UART communication with flight computer',
         'Implementing command dispatch with COBS packet encoding and ACK/timeout recovery',
@@ -38,7 +38,7 @@ export default function Home() {
       role: 'Software Engineer Intern',
       period: 'Jun – Aug 2025',
       link: 'https://www.capitalone.com',
-      linkColor: '#DB1F26',
+      linkColor: '#7c6ba6',
       points: [
         'Rebuilt financial reporting pipeline with serverless AWS (Step Functions, Fargate)',
         'Developed ETL pipeline automating 500k monthly aggregations on $45M+ settlement data',
@@ -50,7 +50,7 @@ export default function Home() {
       role: 'Technical Advisor Intern - GenAI',
       period: 'Nov 2024 – Jun 2025',
       link: 'https://scale.com',
-      linkColor: '#7C3AED',
+      linkColor: '#7c6ba6',
       points: [
         'Improved frontier model\'s algorithmic reasoning through chain-of-thought analysis',
         'Authored 40+ step-by-step solutions for DP and graph problems to fine-tune models',
@@ -62,7 +62,7 @@ export default function Home() {
       role: 'Software Engineer Intern',
       period: 'May – Jul 2024',
       link: 'https://www.codeninjas.com/nj-livingston',
-      linkColor: '#00A651',
+      linkColor: '#7c6ba6',
       points: [
         'Built data platform for 100+ students (React, Flask, MongoDB), replacing Excel tracker',
         'Reduced grading time from 60 to 5 mins/day with autofilled forms and dashboards',
@@ -74,7 +74,7 @@ export default function Home() {
       role: 'Machine Learning Researcher',
       period: 'Jun – Nov 2023',
       link: 'https://ieeexplore.ieee.org/document/10390981',
-      linkColor: '#00629B',
+      linkColor: '#7c6ba6',
       points: [
         'Developed LLM-based semantic code similarity model with fine-tuned embeddings',
         'Outperformed GPT-4 embeddings by 22% F1-score (94.3% accuracy on 45k programs)',
@@ -264,8 +264,8 @@ export default function Home() {
       <main className="tab-content" role="main">
         {activeTab === 'overview' && (
           <section className="about">
-            <p>Focused on building low-latency systems and optimizing ML inference pipelines. Spent the past year working on distributed data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and fine-tuning reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
-            <p>Right now I'm starting two projects: a GPU-accelerated LiDAR mapping system for real-time 3D reconstruction, and a decentralized multi-agent robotics simulator where agents make independent decisions and coordinate without a central controller. Built in C++, CUDA, and Python, focusing on parallel computing, distributed systems, and emerging intelligent behavior.</p>
+            <p>Currently building ground station software for <a href="https://elfin.igpp.ucla.edu/" target="_blank" rel="noopener noreferrer" className="inline-link">UCLA's ELFIN CubeSat</a>. Spent the past year working on distributed data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and fine-tuning reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
+            <p>Interested in low-latency systems, distributed computing, and AI acceleration. Starting two projects exploring these: a GPU-accelerated LiDAR mapping system and a decentralized multi-agent robotics simulator in C++, CUDA, and Python.</p>
             <p>Outside of coding, I'm reading <a href="https://en.wikipedia.org/wiki/Flowers_for_Algernon" target="_blank" rel="noopener noreferrer" className="inline-link">Flowers for Algernon</a>, trying new restaurants (Beli profile needs work), playing some Roblox, and rewatching Harry Potter in prep for a Universal Studios vacation with my girlfriend!</p>
           </section>
         )}
