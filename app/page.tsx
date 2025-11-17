@@ -213,8 +213,9 @@ export default function Home() {
       <main className="tab-content" role="main">
         {activeTab === 'overview' && (
           <section className="about">
-            <p>Currently building ground station software for <a href="https://elfin.igpp.ucla.edu/" target="_blank" rel="noopener noreferrer" className="inline-link">UCLA's ELFIN CubeSat</a>. Spent the past year working on distributed data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and fine-tuning reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
-            <p>Interested in low-latency systems, distributed computing, and AI acceleration. Starting two projects exploring these: a GPU-accelerated LiDAR mapping system and a decentralized multi-agent robotics simulator in C++, CUDA, and Python.</p>
+            <p>Hey! I'm Nathan, a CS student at UCLA trying to get better at building fast systems.</p>
+            <p>Right now I'm developing ground station software for <a href="https://elfin.igpp.ucla.edu/" target="_blank" rel="noopener noreferrer" className="inline-link">UCLA's ELFIN CubeSat</a>. Spent the past year working on data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and fine-tuning reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
+            <p>I'm really into C++, distributed systems, and AI acceleration. Currently exploring GPU-accelerated LiDAR mapping and multi-agent robotics simulation — if you've got advice or cool resources, I'd love to hear them!</p>
             <p>Outside of coding, I'm reading <a href="https://en.wikipedia.org/wiki/Flowers_for_Algernon" target="_blank" rel="noopener noreferrer" className="inline-link">Flowers for Algernon</a>, trying new restaurants (Beli profile needs work), playing some Roblox, and rewatching Harry Potter in prep for a Universal Studios vacation with my girlfriend!</p>
           </section>
         )}
