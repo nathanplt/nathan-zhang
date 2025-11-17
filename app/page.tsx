@@ -12,12 +12,25 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'overview' | 'experience' | 'projects'>('overview');
   const [background, setBackground] = useState<BackgroundType>('hex');
   const [animate, setAnimate] = useState(false);
+  const [expandedExperiences, setExpandedExperiences] = useState<Set<number>>(new Set());
 
   const handleBackgroundChange = (newBackground: BackgroundType) => {
     setBackground(newBackground);
     if (newBackground === 'none') {
       setAnimate(false);
     }
+  };
+
+  const toggleExperience = (index: number) => {
+    setExpandedExperiences(prev => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
   };
 
   const experiences = [
@@ -130,17 +143,7 @@ export default function Home() {
       {background === 'hex' && <HexBackground reducedMotion staticMode={!animate} />}
       {background === 'voronoi' && <VoronoiBackground reducedMotion staticMode={!animate} />}
 
-      <nav
-        style={{
-          position: 'fixed',
-          zIndex: 1000,
-          fontSize: '15px',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-        aria-label="Background controls"
-      >
+      <nav className="background-controls" aria-label="Background controls">
         {[
           { key: 'hex', label: 'hex' },
           { key: 'voronoi', label: 'voronoi' },
@@ -148,32 +151,13 @@ export default function Home() {
           { key: 'grid', label: 'grid' },
           { key: 'none', label: 'none' },
         ].map(({ key, label }, idx) => (
-          <span key={key} style={{ display: 'flex', alignItems: 'center' }}>
-            {idx > 0 && <span style={{ margin: '0 var(--space-2)', color: 'var(--gray-300)' }} aria-hidden="true">/</span>}
+          <span key={key} className="background-controls-item">
+            {idx > 0 && <span className="background-controls-separator" aria-hidden="true">/</span>}
             <button
               onClick={() => handleBackgroundChange(key as BackgroundType)}
               aria-label={`Set background to ${label}`}
               aria-pressed={background === key}
-              style={{
-                background: 'none',
-                border: 'none',
-                padding: 'var(--space-1) var(--space-1)',
-                color: background === key ? 'var(--purple-500)' : 'var(--gray-500)',
-                cursor: 'pointer',
-                fontSize: '15px',
-                fontWeight: '400',
-                transition: 'color 0.2s ease',
-                fontFamily: 'inherit',
-                borderRadius: '2px',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--purple-500)';
-              }}
-              onMouseLeave={(e) => {
-                if (background !== key) {
-                  e.currentTarget.style.color = 'var(--gray-500)';
-                }
-              }}
+              className={`background-controls-button ${background === key ? 'active' : ''}`}
             >
               {label}
             </button>
@@ -188,42 +172,7 @@ export default function Home() {
           aria-label={animate ? 'Pause animation' : 'Play animation'}
           aria-pressed={animate}
           disabled={background === 'none'}
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: 'var(--space-1) var(--space-2)',
-            marginLeft: 'var(--space-3)',
-            color: background === 'none'
-              ? 'var(--gray-300)'
-              : animate
-                ? 'var(--purple-500)'
-                : 'var(--gray-500)',
-            cursor: background === 'none' ? 'not-allowed' : 'pointer',
-            fontSize: '15px',
-            fontWeight: '400',
-            transition: 'color 0.2s ease, background 0.2s ease, opacity 0.2s ease',
-            fontFamily: 'inherit',
-            borderRadius: '4px',
-            opacity: background === 'none' ? 0.4 : 1,
-            width: '60px',
-            textAlign: 'center',
-            textDecorationLine: animate && background !== 'none' ? 'underline' : 'none',
-            textDecorationColor: 'var(--purple-500)',
-            textUnderlineOffset: '3px',
-            textDecorationThickness: '1px',
-          }}
-          onMouseEnter={(e) => {
-            if (background !== 'none') {
-              e.currentTarget.style.color = 'var(--purple-500)';
-              e.currentTarget.style.background = 'var(--gray-50)';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (background !== 'none') {
-              e.currentTarget.style.color = animate ? 'var(--purple-500)' : 'var(--gray-500)';
-              e.currentTarget.style.background = 'none';
-            }
-          }}
+          className={`background-controls-play-button ${animate && background !== 'none' ? 'active' : ''}`}
         >
           {animate ? 'pause' : 'play'}
         </button>
@@ -273,36 +222,65 @@ export default function Home() {
         {activeTab === 'experience' && (
           <section className="experience">
             <div className="timeline">
-              {experiences.map((exp, idx) => (
-                <div key={idx} className="timeline-item">
-                  <div className="timeline-header">
-                    <h3>
-                      {exp.link ? (
-                        <a
-                          href={exp.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-link"
-                          style={{
-                            '--link-color': exp.linkColor
-                          } as React.CSSProperties}
-                        >
-                          {exp.company}
-                        </a>
-                      ) : (
-                        exp.company
-                      )}
-                    </h3>
-                    <span className="period">{exp.period}</span>
+              {experiences.map((exp, idx) => {
+                const isExpanded = expandedExperiences.has(idx);
+                return (
+                  <div
+                    key={idx}
+                    className={`timeline-item ${isExpanded ? 'expanded' : 'collapsed'}`}
+                  >
+                    <div
+                      className="timeline-header"
+                      onClick={() => toggleExperience(idx)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          toggleExperience(idx);
+                        }
+                      }}
+                      aria-expanded={isExpanded}
+                    >
+                      <div className="timeline-content">
+                        <h3>
+                          {exp.link ? (
+                            <a
+                              href={exp.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-link"
+                              style={{
+                                '--link-color': exp.linkColor
+                              } as React.CSSProperties}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {exp.company}
+                            </a>
+                          ) : (
+                            exp.company
+                          )}
+                        </h3>
+                        <div className="timeline-meta">
+                          <p className="role">{exp.role}</p>
+                          <span className="timeline-meta-separator">•</span>
+                          <span className="period">{exp.period}</span>
+                        </div>
+                      </div>
+                      <span className={`timeline-chevron ${isExpanded ? 'expanded' : 'collapsed'}`}>
+                        ▼
+                      </span>
+                    </div>
+                    {isExpanded && (
+                      <ul className="timeline-details">
+                        {exp.points.map((point, i) => (
+                          <li key={i}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <p className="role">{exp.role}</p>
-                  <ul>
-                    {exp.points.map((point, i) => (
-                      <li key={i}>{point}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         )}
