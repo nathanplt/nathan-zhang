@@ -38,7 +38,6 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
   line-height: 1.5;
   background-color: #fdfcfe;
   color: var(--gray-800);
@@ -134,8 +133,9 @@ h1 {
 /* About */
 .about p {
   font-size: 18px;
-  line-height: 1.6;
-  color: var(--gray-600);
+  line-height: 1.7;
+  color: #4a4655;
+  letter-spacing: 0.01em;
   margin-bottom: var(--space-5);
 }
 
@@ -393,7 +393,7 @@ footer {
   top: 20px;
   right: 24px;
   font-size: 15px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
+  font-family: inherit;
   display: flex;
   align-items: center;
 }
@@ -521,26 +521,39 @@ footer {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    font-size: 9px;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    padding: 3px 6px;
-    border-radius: 4px;
-    box-shadow: none;
-  }
-
-  .background-controls-button {
-    font-size: 9px;
-    padding: 2px 1px;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 6px 10px;
+    border-radius: 10px;
+    gap: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   }
 
   .background-controls-separator {
-    font-size: 9px;
-    margin: 0 1px;
+    display: none;
+  }
+
+  .background-controls-button {
+    font-size: 13px;
+    padding: 8px 10px;
+    min-height: 36px;
+    border-radius: 6px;
+  }
+
+  .background-controls-button.active {
+    background: rgba(124, 107, 166, 0.12);
   }
 
   .background-controls-play-button {
-    font-size: 9px;
+    font-size: 13px;
+    padding: 8px 14px;
+    min-height: 36px;
+    margin-left: 4px;
+    width: auto;
+    border-left: 1px solid var(--gray-200);
+    border-radius: 0;
+    padding-left: 14px;
   }
 }

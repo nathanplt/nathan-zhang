@@ -41,9 +41,9 @@ export default function Home() {
       link: 'https://elfin.igpp.ucla.edu/',
       linkColor: '#7c6ba6',
       points: [
-        'Building multithreaded Python backend for UART communication with flight computer',
-        'Implementing command dispatch with COBS packet encoding and ACK/timeout recovery',
-        'Integrating ZeroMQ messaging to stream telemetry packets to GUI and ground database'
+        'Building multithreaded Python backend for communication with flight computer',
+        'Implementing command dispatch with COBS packet encoding and timeout recovery',
+        'Integrating ZeroMQ PUB/SUB to stream telemetry packets to GUI and database'
       ]
     },
     {
