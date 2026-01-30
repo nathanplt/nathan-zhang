@@ -365,12 +365,6 @@ footer {
   transition: opacity 0.2s ease;
 }
 
-.footer-links a[target="_blank"]::after {
-  content: ' ↗';
-  font-size: 0.85em;
-  opacity: 0.5;
-}
-
 .footer-links a:hover {
   opacity: 0.7;
 }
