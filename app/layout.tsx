@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-space-grotesk",
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-ibm-plex",
 });
 
 export const metadata: Metadata = {
@@ -100,8 +108,8 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
-      <body className={spaceGrotesk.className}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexSans.variable}`}>
+      <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

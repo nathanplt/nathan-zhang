@@ -38,6 +38,7 @@
 }
 
 body {
+  font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   background-color: #fdfcfe;
   color: var(--gray-800);
@@ -132,10 +133,11 @@ h1 {
 
 /* About */
 .about p {
-  font-size: 18px;
-  line-height: 1.7;
+  font-family: var(--font-ibm-plex), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
   color: #4a4655;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   margin-bottom: var(--space-5);
 }
 
@@ -263,9 +265,10 @@ h2 {
 }
 
 .timeline-item li {
+  font-family: var(--font-ibm-plex), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--gray-600);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.65;
   margin-bottom: var(--space-2);
   padding-left: var(--space-4);
   position: relative;
@@ -322,9 +325,10 @@ h2 {
 }
 
 .project-item p:last-child {
+  font-family: var(--font-ibm-plex), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--gray-600);
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.6;
   margin: 0;
 }
 
