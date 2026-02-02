@@ -215,7 +215,7 @@ export default function Home() {
           <section className="about">
             <p>Hey! I'm a CS undergrad at UCLA w/ roots in NJ. I'm broadly interested in computer systems and making things fast - right now, studying C++, parallel & distributed computing, and AI inference. If you've got good resources or interesting projects, please reach out!</p>
             <p>I'll be joining <a href="https://www.citadel.com/" target="_blank" rel="noopener noreferrer" className="inline-link">Citadel</a> as a SWE intern for Summer 2026. Previously, I worked on data infrastructure at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
-            <p>Outside of all that, I'm watching <a href="https://myanimelist.net/anime/30/Shinseiki_Evangelion" target="_blank" rel="noopener noreferrer" className="inline-link">Neon Genesis Evangelion</a>, trying new restaurants (Beli profile needs work), and planning some fun trips!</p>
+            <p>Outside of all that, I'm watching <a href="https://myanimelist.net/anime/2904/Code_Geass__Hangyaku_no_Lelouch_R2" target="_blank" rel="noopener noreferrer" className="inline-link">Code Geass</a>, trying new restaurants (Beli profile needs work), and planning some fun trips!</p>
           </section>
         )}
 
