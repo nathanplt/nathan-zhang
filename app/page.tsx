@@ -98,6 +98,20 @@ export default function Home() {
 
   const projects = [
     {
+      title: 'MiniJava Compiler',
+      tech: 'Java, ASM, LLVM IR',
+      description: 'Compiler for a statically-typed subset of Java covering lexing, parsing, semantic analysis, and code generation to LLVM IR.',
+      github: 'https://github.com/nathanplt',
+      wip: true
+    },
+    {
+      title: 'Memory Allocator',
+      tech: 'C, mmap, pthreads',
+      description: 'High-performance allocator with slab pages, alignment guarantees, thread-local caches to minimize contention, and page cache instrumentation for profiling.',
+      github: 'https://github.com/nathanplt',
+      wip: true
+    },
+    {
       title: 'Low-Latency Messaging System',
       tech: 'C++, Boost.Asio, ZeroMQ, Concurrency',
       description: 'High-throughput pub/sub messaging system with thread-safe concurrent architecture using thread pools, async I/O, and atomic operations. Benchmarked at <1ms p99 latency.',
@@ -110,22 +124,16 @@ export default function Home() {
       github: 'https://github.com/nathanplt/pr-review-agent'
     },
     {
+      title: 'Trading Exchange',
+      tech: 'C++, BST Order Book, TCP',
+      description: 'Exchange with a complete price-time priority matching engine backed by a BST order book. Gateway server handles auth, risk checks, and order execution, and publishes a dedicated market data channel per instrument.',
+      github: 'https://github.com/nathanplt'
+    },
+    {
       title: 'Locus (Meta AI Hackathon – 3rd Place)',
       tech: 'VR, Cesium API, Qwen-VL, Stable Diffusion, Python',
       description: 'AI-powered VR storyboarding tool for filmmakers to explore real-world locations and generate cinematic storyboards. Integrates image-to-text analysis, prompt optimization, and scene synthesis pipelines.',
       github: 'https://www.youtube.com/watch?v=YuX-z0hmIzI'
-    },
-    {
-      title: 'Intelligent Document Search Engine',
-      tech: 'Python, BM25, Sentence Transformers, FastAPI, PostgreSQL',
-      description: 'Hybrid dense–sparse retrieval engine combining BM25 ranking with transformer embeddings. Supports semantic search, custom relevance scoring, and metadata filtering for fast document discovery.',
-      github: 'https://github.com/nathanplt'
-    },
-    {
-      title: 'Security Footage Analysis System',
-      tech: 'Python, OpenCV, YOLOv8, FastAPI',
-      description: 'Real-time computer vision pipeline for multi-camera video feeds, performing motion tracking, object detection, and automated event classification through RESTful APIs.',
-      github: 'https://github.com/nathanplt'
     },
     {
       title: 'Bill-Splitting App',
@@ -296,7 +304,10 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="project-item"
                 >
-                  <h3>{project.title}</h3>
+                  <div className="project-item-header">
+                    <h3>{project.title}</h3>
+                    {project.wip && <span className="wip-badge">(in progress)</span>}
+                  </div>
                   <p className="tech-stack">{project.tech}</p>
                   <p>{project.description}</p>
                 </a>
