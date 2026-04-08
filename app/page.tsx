@@ -99,8 +99,8 @@ export default function Home() {
   const projects = [
     {
       title: 'MiniJava Compiler',
-      tech: 'Java, ASM, LLVM IR',
-      description: 'Compiler for a statically-typed subset of Java covering lexing, parsing, semantic analysis, and code generation to LLVM IR.',
+      tech: 'Java, ASM, RISC-V',
+      description: 'Compiler for a statically-typed subset of Java covering lexing, parsing, semantic analysis, and code generation to RISC-V.',
       github: 'https://github.com/nathanplt',
       wip: true
     },
