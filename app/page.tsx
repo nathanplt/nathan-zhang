@@ -223,7 +223,7 @@ export default function Home() {
           <section className="about">
             <p>Hey! I'm a CS undergrad at UCLA w/ roots in NJ. I'm broadly interested in computer systems and theory - right now, studying C++, parallel & distributed computing, and compilers. If you've got good resources or interesting projects, I'd love to talk.</p>
             <p>I'll be joining <a href="https://www.citadel.com/" target="_blank" rel="noopener noreferrer" className="inline-link">Citadel</a> as a SWE intern this Summer, and <a href="https://openai.com/" target="_blank" rel="noopener noreferrer" className="inline-link">OpenAI</a> as a MTS intern this Fall. Previously, I worked on data infra at <a href="https://www.capitalone.com" target="_blank" rel="noopener noreferrer" className="inline-link">Capital One</a> and reasoning models at <a href="https://scale.com" target="_blank" rel="noopener noreferrer" className="inline-link">Scale AI</a>.</p>
-            <p>Outside of all that, I'm watching <a href="https://myanimelist.net/anime/60058/Oshi_no_Ko_3rd_Season" target="_blank" rel="noopener noreferrer" className="inline-link">Oshi no Ko</a>, going down rabbit holes (usually pure math, philosophy, or engineering blogs), trying new restaurants, and planning some fun trips back to Asia!</p>
+            <p>Outside of all that, I'm reading <a href="https://www.turtleme.com/tbate-novel" target="_blank" rel="noopener noreferrer" className="inline-link">The Beginning After The End</a>, going down rabbit holes (usually pure math, philosophy, or engineering blogs), trying new restaurants, and planning some fun trips back to Asia!</p>
           </section>
         )}
 
@@ -325,6 +325,7 @@ export default function Home() {
           <span>/</span>
           <a href="https://github.com/nathanplt" target="_blank" rel="noopener noreferrer">github</a>
         </div>
+        <p className="footer-updated">updated apr 2026</p>
       </footer>
       </div>
     </>

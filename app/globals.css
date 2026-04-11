@@ -375,10 +375,21 @@ footer {
   margin-top: var(--space-10);
   padding-top: var(--space-6);
   border-top: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
 }
 
 .footer-links {
   font-size: 15px;
+}
+
+.footer-updated {
+  font-size: 13px;
+  color: var(--gray-400);
+  margin: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 .footer-links a {
@@ -571,5 +582,11 @@ footer {
     border-left: 1px solid var(--gray-200);
     border-radius: 0;
     padding-left: 14px;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
   }
 }
